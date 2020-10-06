@@ -1,0 +1,7 @@
+{
+	EXUpdatesURL = "https://exp.host/@my-expo-username/my-app-slug";
+	EXUpdatesSDKVersion = "39.0.0";
+	EXUpdatesEnabled = "NO";
+	EXUpdatesCheckOnLaunch = "ALWAYS";
+	EXUpdatesLaunchWaitMs = 0;
+}
