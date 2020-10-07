@@ -25,7 +25,7 @@ export const ButtonTitle: React.FC<ButtonTitleProps> = ({
   centered = false,
   onPress,
 }) => {
-  const styles = useStyles(_styles);
+  const { styles } = useStyles(_styles);
 
   return (
     <>
@@ -38,11 +38,28 @@ export const ButtonTitle: React.FC<ButtonTitleProps> = ({
   )
 }
 
+export const ButtonToolbar: React.FC<ButtonTitleProps> = ({
+  title,
+  onPress,
+}) => {
+  const { styles } = useStyles(_styles);
+
+  return (
+    <>
+      <TouchableOpacity onPress={onPress}>
+        <View style={styles.buttonToolbarContainer}>
+          <Text style={styles.textMain}>{title}</Text>
+        </View>
+      </TouchableOpacity>
+    </>
+  )
+}
+
 export const ButtonIcon: React.FC<ButtonIconProps> = ({
   icon,
   onPress,
 }) => {
-  const styles = useStyles(_styles);
+  const { styles } = useStyles(_styles);
 
   return (
     <>
@@ -59,6 +76,9 @@ const _styles = (theme: ThemeType) => StyleSheet.create({
   buttonContainer: {
     margin: theme.sizes.s,
   },
+  buttonToolbarContainer: {
+    margin: 10,
+  },
   buttonIcon: {
     fontSize: 28,
     color: theme.colors.text,
@@ -68,4 +88,8 @@ const _styles = (theme: ThemeType) => StyleSheet.create({
     margin: theme.sizes.s,
     color: theme.colors.text,
   },
+  textMain: {
+    fontSize: 18,
+    color: theme.colors.main,
+  }
 });
