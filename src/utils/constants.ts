@@ -22,6 +22,17 @@ class Contants {
     SettingsScreen: 'Settings',
   }
 
+  PostScreen = {
+    saveButton: {
+      id: 'save_button',
+      text: 'Save',
+    },
+    removeButton: {
+      id: 'remove_button',
+      text: 'Remove',
+    },
+  }
+
   // Styles
   colors = {
     main: '#4d7198',
