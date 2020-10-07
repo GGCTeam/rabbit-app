@@ -1,28 +1,27 @@
+const prefix = 'rabbitapp';
 class Contants {
   ScreenNames = {
-    CounterScreen: 'rnn_starter.CounterScreen',
-    ExpoScreen: 'rnn_starter.ExpoScreen',
+    SubredditsScreen: `${prefix}.SubredditsScreen`,
+    SavedScreen: `${prefix}.SavedScreen`,
+    SettingsScreen: `${prefix}.SettingsScreen`,
+    SubredditPostsScreen: `${prefix}.SubredditPostsScreen`,
   }
 
   BottomTabsTitles = {
-    tab1: 'Counter',
-    tab2: 'Expo',
+    tab1: 'Subreddits',
+    tab2: 'Saved',
+    tab3: 'Settings',
   }
 
   ScreenTitles = {
-    CounterScreen: 'Counter',
-    ExpoScreen: 'Expo',
-  }
-
-  CounterScreen = {
-    decButtonId: 'decButtonId',
-    decButtonTitle: 'Dec',
-    incButtonId: 'incButtonId',
-    incButtonTitle: 'Inc',
+    SubredditsScreen: 'Subreddits',
+    SavedScreen: 'Saved',
+    SettingsScreen: 'Settings',
   }
 
   // Styles
   colors = {
+    main: '#4d7198',
     black: '#000',
     white: '#fff',
     lightGrey: '#dcdde1',
