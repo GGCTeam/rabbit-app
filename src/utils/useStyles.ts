@@ -44,7 +44,8 @@ export const setOptionsForUseStyles = (_options: UseStylesOptionsType) => {
 
 function useStyles<T>(themedStylesFunc: ThemedStylesFuncType<T>) {
   const [themeName, setThemeName] = useState<ThemeNameType>(generateThemeName()); // here we should ger the mode
-  let themedStyles = themedStylesFunc(generateTheme(themeName));
+  const theme = generateTheme(themeName);
+  let themedStyles = themedStylesFunc(theme);
 
   useEffect(() => {
     const onModeChange = (_cs: any) => {
@@ -86,7 +87,10 @@ function useStyles<T>(themedStylesFunc: ThemedStylesFuncType<T>) {
     }
   }
 
-  return themedStyles;
+  return {
+    styles: themedStyles,
+    theme,
+  };
 }
 
 const normalize = (

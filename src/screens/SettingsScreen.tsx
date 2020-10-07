@@ -16,7 +16,7 @@ const SettingsScreen: NavigationFunctionComponent = observer(({
   componentId,
 }) => {
   const { } = useStores();
-  const styles = useStyles(_styles);
+  const { styles } = useStyles(_styles);
 
   return (
     <SafeAreaView style={styles.container}>
