@@ -23,3 +23,34 @@ type UseStylesOptionsType = {
   normalize?: boolean;
   darkmode?: boolean;
 }
+
+type RedditJsonResponse = {
+  kind: string;
+  data: RedditJsonResponseData;
+}
+
+type RedditJsonResponseData = {
+  modhash: string;
+  before: string;
+  after: string;
+  dist: number;
+  children: RedditJsonResponseDataChild[];
+}
+
+type RedditJsonResponseDataChild = {
+  kind: string;
+  data: RedditPost;
+}
+
+type RedditPost = {
+  title: string;
+  url: string;
+}
+
+type SubredditData = {
+  posts: RedditPost[];
+}
+
+type SubredditPostsScreenProps = {
+  subreddit: string;
+}
