@@ -3,27 +3,26 @@ import {
     SafeAreaView,
     Text,
     View,
-    StyleSheet, ActivityIndicator
+    StyleSheet, ActivityIndicator, Share, Linking
 } from 'react-native';
 import { observer, useLocalObservable } from 'mobx-react';
-import { NavigationFunctionComponent } from 'react-native-navigation';
+import { Navigation, NavigationFunctionComponent } from 'react-native-navigation';
 import { WebView } from 'react-native-webview';
 
 import { stores, useStores } from '../stores';
 import Constants from '../utils/constants';
 import useStyles from '../utils/useStyles';
-import { generateRedditPostUrl, generateRedditUserString } from '../utils/helpMethods';
+import { generateRedditPostUrl, generateRedditUserString, sleep } from '../utils/helpMethods';
+import { useNavigationButtonPress } from 'react-native-navigation-hooks/dist/hooks';
+import { ButtonToolbar } from '../components/Button';
 
 const PostScreen: NavigationFunctionComponent<PostScreenProps> = observer(({
   componentId,
   post,
 }) => {
-  const { } = useStores();
-  const styles = useStyles(_styles);
-
-  useEffect(() => {
-    setTimeout(store.showContent, 250); // mostly problem on android
-  }, [componentId]);
+  const { subreddits } = useStores();
+  const { styles, theme } = useStyles(_styles);
+  const postUrl = generateRedditPostUrl(post.permalink);
 
   const store = useLocalObservable(() => ({
     canShowcontent: false, // fix for android, to correctly show webview
@@ -36,17 +35,60 @@ const PostScreen: NavigationFunctionComponent<PostScreenProps> = observer(({
     },
   }));
 
+  useEffect(() => {
+    setTimeout(store.showContent, 500); // mostly problem on android
+  }, [componentId]);
+
+  useNavigationButtonPress(() => { savePost() }, componentId, Constants.PostScreen.saveButton.id);
+  useNavigationButtonPress(() => { removePost() }, componentId, Constants.PostScreen.removeButton.id);
+
+  const savePost = async () => {
+    subreddits.addSaved(post);
+
+    Navigation.mergeOptions(componentId, { topBar: { rightButtons: [Constants.PostScreen.removeButton] } });
+  }
+
+  const removePost = async () => {
+    subreddits.removeSaved(post);
+
+    Navigation.mergeOptions(componentId, { topBar: { rightButtons: [Constants.PostScreen.saveButton] } });
+  }
+
+  const shareUrl = () =>
+    Share.share({ url: postUrl });
+
+  const openUrl = () =>
+    Linking.openURL(postUrl);
+
+  const generateIndicator = () => (
+    <ActivityIndicator
+      size={'small'}
+      style={styles.indicator}
+      color={theme.colors.main}
+    />
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       {
         store.canShowcontent
           ? (
             <View style={styles.webViewContainer}>
-              { store.loading ? <ActivityIndicator /> : undefined }
               <WebView
-                source={{ uri: generateRedditPostUrl(post.permalink) }}
+                source={{ uri: postUrl }}
                 onLoadEnd={store.finishLoading}
               />
+              <View style={styles.toolbar}>
+                <ButtonToolbar
+                  title={'Share'}
+                  onPress={shareUrl}
+                />
+                { store.loading ? generateIndicator() : undefined }
+                <ButtonToolbar
+                  title={'Open in browser'}
+                  onPress={openUrl}
+                />
+              </View>
             </View>
           )
           : undefined
@@ -65,6 +107,20 @@ const _styles = (theme: ThemeType) => StyleSheet.create({
   webViewContainer: {
     width: '100%',
     height: '100%',
+    backgroundColor: theme.colors.bg,
+  },
+  indicator: {
+    margin: 8,
+  },
+  toolbar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  linkText: {
+    color: theme.colors.main,
+    margin: 12,
+    fontSize: 18,
   }
 });
 
@@ -76,9 +132,11 @@ PostScreen.options = props => ({
     subtitle: {
       text: generateRedditUserString(props.post.author),
     },
-    backButton: {
-      title: '',
-    }
+    rightButtons: [
+      stores.subreddits.isPostInSaved(props.post)
+        ? Constants.PostScreen.removeButton
+        : Constants.PostScreen.saveButton
+    ]
   },
 });
 
