@@ -56,7 +56,18 @@ class NavigationService implements IService {
       },
       bottomTabs: {
         titleDisplayMode: 'alwaysShow',
-      }
+      },
+      topBar: {
+        title: {
+          color: Constants.colors.main,
+        },
+        rightButtonColor: Constants.colors.main,
+        leftButtonColor: Constants.colors.main,
+        backButton: {
+          color: Constants.colors.main,
+          showTitle: false,
+        }
+      },
     });
   }
 }
