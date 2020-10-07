@@ -1,30 +1,49 @@
 import React from 'react';
 import {
     SafeAreaView,
-    Text,
-    View,
     StyleSheet,
 } from 'react-native';
 import { observer } from 'mobx-react';
 import { NavigationFunctionComponent } from 'react-native-navigation';
+import { FlatList } from 'react-native-gesture-handler';
 
 import { useStores } from '../stores';
 import Constants from '../utils/constants';
 import useStyles from '../utils/useStyles';
+import { useServices } from '../services';
+import Post from '../components/Post';
+import AppleStyleSwipeableRow from '../components/AppleStyleSwipeableRow';
+
 
 const SavedScreen: NavigationFunctionComponent = observer(({
   componentId,
 }) => {
-  const { } = useStores();
-  const styles = useStyles(_styles);
+  const { subreddits } = useStores();
+  const { navigation } = useServices();
+  const { styles } = useStyles(_styles);
+
+  const openPost = (post: RedditPost) => () =>
+    navigation.pushPost(componentId, { post })
+
+  const removePost = (post: RedditPost) => () =>
+    subreddits.removeSaved(post);
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.counterContainer}>
-        <Text style={styles.text}>
-          { 'Saved' }
-        </Text>
-      </View>
+      <FlatList
+        data={subreddits.saved.slice()}
+        keyExtractor={it => it.id}
+        style={styles.list}
+        renderItem={({ item }) => (
+          <AppleStyleSwipeableRow
+            title={'Delete'}
+            backgroundColor={'#dd2c00'}
+            onPress={removePost(item)}
+          >
+            <Post withSub item={item} onPress={openPost(item)} />
+          </AppleStyleSwipeableRow>
+        )}
+      />
     </SafeAreaView>
   );
 });
@@ -32,22 +51,10 @@ const SavedScreen: NavigationFunctionComponent = observer(({
 const _styles = (theme: ThemeType) => StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: theme.colors.bg,
   },
-  counterContainer: {
-    padding: theme.sizes.s,
-    flexDirection: 'row',
-    width: '80%',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 64,
-    margin: theme.sizes.s,
-    textAlign: 'center',
-    color: theme.colors.text,
+  list: {
+    flex: 1,
   },
 });
 
