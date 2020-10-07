@@ -10,7 +10,7 @@ const TextInputPrompt: NavigationFunctionComponent = ({
   componentId
 }) => {
   const { subreddits } = useStores();
-  const styles = useStyles(_styles);
+  const { styles } = useStyles(_styles);
   const dismiss = () => Navigation.dismissModal(componentId);
 
   const addSubreddit = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
@@ -80,6 +80,10 @@ const _styles = (theme: ThemeType) => StyleSheet.create({
   }
 });
 
-TextInputPrompt.options = (props) => ({ })
+TextInputPrompt.options = (props) => ({
+  topBar: {
+    visible: false,
+  }
+})
 
 export default TextInputPrompt;

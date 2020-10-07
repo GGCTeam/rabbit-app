@@ -22,7 +22,7 @@ const SubredditsScreen: NavigationFunctionComponent = observer(({
 }) => {
   const { subreddits } = useStores();
   const { navigation } = useServices();
-  const styles = useStyles(_styles);
+  const { styles } = useStyles(_styles);
 
   useNavigationButtonPress(async () => {
     navigation.showTextInputPrompt();
