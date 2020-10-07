@@ -20,6 +20,14 @@ class NavigationService implements IService {
     this.push(cId, Constants.ScreenNames.SubredditPostsScreen, passProps);
   }
 
+  pushPost = (cId: string, passProps: PostScreenProps) => {
+    this.push(cId, Constants.ScreenNames.PostScreen, passProps);
+  }
+
+  showTextInputPrompt = () => {
+    this.show(Constants.ScreenNames.TextInputPrompt);
+  }
+
   private push<T>(cId: string, cName: string, passProps?: T) {
     Navigation.push(cId, {
       component:{name: cName, passProps},

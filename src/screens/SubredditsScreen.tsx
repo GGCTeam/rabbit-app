@@ -8,13 +8,14 @@ import {
 import { observer } from 'mobx-react';
 import { Navigation, NavigationFunctionComponent } from 'react-native-navigation';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
+import { useNavigationButtonPress } from 'react-native-navigation-hooks/dist/hooks';
 
 import { useStores } from '../stores';
 import { useServices } from '../services';
 import Constants from '../utils/constants';
 import useStyles from '../utils/useStyles';
 import { ButtonTitle } from '../components/Button';
-import { useNavigationButtonPress } from 'react-native-navigation-hooks/dist/hooks';
+import AppleStyleSwipeableRow from '../components/AppleStyleSwipeableRow';
 
 const SubredditsScreen: NavigationFunctionComponent = observer(({
   componentId,
@@ -24,15 +25,14 @@ const SubredditsScreen: NavigationFunctionComponent = observer(({
   const styles = useStyles(_styles);
 
   useNavigationButtonPress(async () => {
-    await Navigation.showModal({
-      component: {
-        name: 'alert'
-      }
-    })
+    navigation.showTextInputPrompt();
   }, componentId, 'add_button');
 
   const onSubredditPressed = (subreddit: string) => () =>
     navigation.pushSubredditPosts<SubredditPostsScreenProps>(componentId, { subreddit });
+
+  const deleteSubreddit = (subreddit: string) => () =>
+    subreddits.removeSubreddit(subreddit);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,14 +43,17 @@ const SubredditsScreen: NavigationFunctionComponent = observer(({
         renderItem={({ item }) => {
           return (
             <>
-              <TouchableOpacity
-                onPress={onSubredditPressed(item)}
-                // onLongPress={}
+              <AppleStyleSwipeableRow
+                title={'Delete'}
+                backgroundColor={'#dd2c00'}
+                onPress={deleteSubreddit(item)}
               >
-                <View style={styles.buttonContainer}>
-                  <Text style={styles.text}>{ item }</Text>
-                </View>
-              </TouchableOpacity>
+                <TouchableOpacity onPress={onSubredditPressed(item)}>
+                  <View style={styles.buttonContainer}>
+                    <Text style={styles.text}>{ item }</Text>
+                  </View>
+                </TouchableOpacity>
+              </AppleStyleSwipeableRow>
             </>
           )
         }}
@@ -68,7 +71,8 @@ const _styles = (theme: ThemeType) => StyleSheet.create({
     flex: 1,
   },
   buttonContainer: {
-    margin: theme.sizes.s,
+    backgroundColor: theme.colors.bg,
+    padding: theme.sizes.s,
   },
   text: {
     fontSize: 24,

@@ -1,42 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     SafeAreaView,
     Text,
     View,
     StyleSheet,
     RefreshControl,
+    Linking
 } from 'react-native';
 import { observer } from 'mobx-react';
 import { NavigationFunctionComponent } from 'react-native-navigation';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
-import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks/dist/hooks';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 import { useStores } from '../stores';
 import Constants from '../utils/constants';
 import useStyles from '../utils/useStyles';
+import { generateRedditUserString } from '../utils/helpMethods';
+import { useServices } from '../services';
+
 
 const SubredditPostsScreen: NavigationFunctionComponent<SubredditPostsScreenProps> = observer(({
   componentId,
   subreddit,
 }) => {
   const { subreddits } = useStores();
+  const { navigation } = useServices();
   const styles = useStyles(_styles);
 
   const { posts } = subreddits.dict[subreddit] as SubredditData || [];
 
-  useNavigationComponentDidAppear(() => {
+  useEffect(() => {
     loadPosts();
-  }, componentId);
+  }, [componentId]);
 
-  const loadPosts = async () => {
+  const loadPosts = async () =>
     await subreddits.getPostsForSubreddit(subreddit);
-  }
+
+  const openPost = (post: RedditPost) => async () =>
+    navigation.pushPost(componentId, { post })
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={posts}
-        keyExtractor={it => it.url}
+        keyExtractor={it => it.id}
         style={styles.list}
         refreshing={subreddits.loading}
         onRefresh={loadPosts}
@@ -44,9 +53,15 @@ const SubredditPostsScreen: NavigationFunctionComponent<SubredditPostsScreenProp
         renderItem={({ item }) => {
           return (
             <>
-              <TouchableOpacity onPress={() => { }}>
+              <TouchableOpacity onPress={openPost(item)}>
                 <View style={styles.buttonContainer}>
-                  <Text style={styles.text}>{ item.title }</Text>
+                <View style={styles.upsTextContainer}>
+                    <Text style={styles.upsText}>{ item.ups }</Text>
+                  </View>
+                  <View style={styles.titlesContainer}>
+                    <Text style={styles.subtitle}>Posted by { generateRedditUserString(item.author) } { dayjs(item.created_utc*1000).fromNow() }</Text>
+                    <Text style={styles.title}>{ item.title }</Text>
+                  </View>
                 </View>
               </TouchableOpacity>
             </>
@@ -66,13 +81,33 @@ const _styles = (theme: ThemeType) => StyleSheet.create({
     flex: 1,
   },
   buttonContainer: {
-    margin: theme.sizes.s,
+    flexDirection: 'row',
+    marginVertical: 8,
   },
-  text: {
+  titlesContainer: {
+    flex: 1,
+  },
+  title: {
     fontSize: 18,
-    margin: theme.sizes.s,
+    marginVertical: 2,
     color: theme.colors.text,
   },
+  subtitle: {
+    flex: 1,
+    marginVertical: 2,
+    fontSize: 14,
+    color: theme.colors.grey
+  },
+  upsTextContainer: {
+    width: 30,
+    margin: 2,
+  },
+  upsText: {
+    fontSize: 14,
+    textAlign: 'center',
+    color: theme.colors.grey,
+    // fontWeight: 'bold'
+  }
 });
 
 SubredditPostsScreen.options = props => ({
