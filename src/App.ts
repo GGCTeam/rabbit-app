@@ -8,7 +8,8 @@ import SubredditsScreen from './screens/SubredditsScreen';
 import SavedScreen from './screens/SavedScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import SubredditPostsScreen from './screens/SubredditPostsScreen';
-import Alert from './screens/Alert';
+import PostScreen from './screens/PostScreen';
+import TextInputPrompt from './screens/TextInputPrompt';
 
 import { withStoresProvider, hydrateStores } from './stores';
 import { withServicesProvider, initServices } from './services';
@@ -20,7 +21,9 @@ Screens.set(Constants.ScreenNames.SubredditsScreen, SubredditsScreen);
 Screens.set(Constants.ScreenNames.SavedScreen, SavedScreen);
 Screens.set(Constants.ScreenNames.SettingsScreen, SettingsScreen);
 Screens.set(Constants.ScreenNames.SubredditPostsScreen, SubredditPostsScreen);
-Screens.set('alert', Alert);
+Screens.set(Constants.ScreenNames.PostScreen, PostScreen);
+
+Screens.set(Constants.ScreenNames.TextInputPrompt, TextInputPrompt);
 
 // Register screens
 Screens.forEach((C, key) => {
