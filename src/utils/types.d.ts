@@ -49,6 +49,8 @@ type RedditPost = {
   permalink: string;
   author: string;
   ups: number;
+  num_comments: number;
+  subreddit: string;
   created_utc: number;
 }
 
