@@ -9,6 +9,8 @@ class RedditPost {
   @persist @observable permalink = '';
   @persist @observable author = '';
   @persist @observable ups = 0;
+  @persist @observable num_comments = 0;
+  @persist @observable subreddit = '';
   @persist @observable created_utc = 0;
 }
 
@@ -23,33 +25,35 @@ class SubredditsStore {
   constructor() {
     makeObservable(this, {
       all: observable,
+      saved: observable,
       dict: observable,
       loading: observable,
       addSubreddit: action,
       removeSubreddit: action,
       getPostsForSubreddit: action,
+      addSaved: action,
+      removeSaved: action,
     });
   }
 
-  @persist('list') @observable all: string[] = [];
-  @persist('map', SubredditData) @observable dict = {};
-  @observable loading = false;
+  @persist('list') all: string[] = [];
+  @persist('list', RedditPost) saved: RedditPost[] = [];
+  @persist('map', SubredditData) dict = {};
+  loading = false;
 
-  @action addSubreddit = async (subreddit: string) => {
+  addSubreddit = async (subreddit: string) => {
     const ndx = this.all.findIndex(it => it === subreddit);
 
     if (ndx !== -1) {
-      runInAction(() => this.all.splice(ndx, 1));
-      // this.all.splice(ndx, 1);
+      this.all.splice(ndx, 1);
     }
 
-    runInAction(() => this.all.unshift(subreddit));
-    // this.all.unshift(subreddit);
+    this.all.unshift(subreddit);
 
     await this.getPostsForSubreddit(subreddit);
   }
 
-  @action removeSubreddit = async (subreddit: string) => {
+  removeSubreddit = async (subreddit: string) => {
     const ndx = this.all.findIndex(it => it === subreddit);
 
     if (ndx !== -1) {
@@ -58,8 +62,8 @@ class SubredditsStore {
     }
   }
 
-  @action getPostsForSubreddit = async (subreddit: string) => {
-    runInAction(() => this.loading = true);
+  getPostsForSubreddit = async (subreddit: string) => {
+    this.loading = true
 
     let posts: RedditPost[] = [];
     try {
@@ -79,8 +83,22 @@ class SubredditsStore {
       };
     });
 
-    runInAction(() => this.loading = false);
+    this.loading = false
   }
+
+  addSaved = async (s: RedditPost) => {
+    this.saved.unshift(s);
+  }
+
+  removeSaved = async (p: RedditPost) => {
+    const ndx = this.saved.findIndex(it => it.id === p.id);
+
+    if (ndx !== -1) {
+      this.saved.splice(ndx, 1);
+    }
+  }
+
+  isPostInSaved = (p: RedditPost) => this.saved.findIndex(it => it.id === p.id) !== -1;
 }
 
 export default new SubredditsStore();
