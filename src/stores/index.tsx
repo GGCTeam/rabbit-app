@@ -2,14 +2,14 @@ import React from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { create } from 'mobx-persist';
 
-import CounterStore from './counterStore';
 import UIStore from './uiStore';
+import SubredditsStore from './subredditsStore';
 
 export const stores = {
-    counter: CounterStore,
     ui: UIStore,
+    subreddits: SubredditsStore,
 };
-// const f_stores = () => stores;
+
 const storeContext = React.createContext(stores);
 
 export const withStoresProvider = (C: React.FC) => (props: any) => {
@@ -28,6 +28,5 @@ const hydrate = create({
     debounce: 500,
 });
 export const hydrateStores = async () => {
-    await hydrate(stores.counter.STORAGE_ID, stores.counter);
-    // await hydrate(stores.ui.STORAGE_ID, stores.ui);
+    await hydrate(stores.subreddits.STORAGE_ID, stores.subreddits);
 };
