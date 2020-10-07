@@ -5,6 +5,9 @@ class Contants {
     SavedScreen: `${prefix}.SavedScreen`,
     SettingsScreen: `${prefix}.SettingsScreen`,
     SubredditPostsScreen: `${prefix}.SubredditPostsScreen`,
+    PostScreen: `${prefix}.PostScreen`,
+
+    TextInputPrompt: `${prefix}.TextInputPrompt`,
   }
 
   BottomTabsTitles = {
@@ -24,7 +27,8 @@ class Contants {
     main: '#4d7198',
     black: '#000',
     white: '#fff',
-    lightGrey: '#dcdde1',
+    lightGrey: '#b2bec3',
+    grey: '#636e72',
     blue: '#4d7198',
     yellow: '#fbc531',
   }

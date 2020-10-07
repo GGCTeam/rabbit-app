@@ -43,8 +43,13 @@ type RedditJsonResponseDataChild = {
 }
 
 type RedditPost = {
+  id: string;
   title: string;
   url: string;
+  permalink: string;
+  author: string;
+  ups: number;
+  created_utc: number;
 }
 
 type SubredditData = {
@@ -53,4 +58,8 @@ type SubredditData = {
 
 type SubredditPostsScreenProps = {
   subreddit: string;
+}
+
+type PostScreenProps = {
+  post: RedditPost;
 }
