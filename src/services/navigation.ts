@@ -16,17 +16,13 @@ class NavigationService implements IService {
     Navigation.dismissAllModals();
   }
 
-  pushExpo = (cId: string) => {
-    this.push(cId, Constants.ScreenNames.ExpoScreen);
+  pushSubredditPosts<T>(cId: string, passProps?: T) {
+    this.push(cId, Constants.ScreenNames.SubredditPostsScreen, passProps);
   }
 
-  showExpo = () => {
-    this.show(Constants.ScreenNames.ExpoScreen);
-  }
-
-  private push = (cId: string, cName: string) => {
+  private push<T>(cId: string, cName: string, passProps?: T) {
     Navigation.push(cId, {
-      component:{name: cName}
+      component:{name: cName, passProps},
     })
   }
 
