@@ -1,24 +1,19 @@
 import React, { useEffect } from 'react';
 import {
     SafeAreaView,
-    Text,
-    View,
     StyleSheet,
     RefreshControl,
-    Linking
 } from 'react-native';
 import { observer } from 'mobx-react';
 import { NavigationFunctionComponent } from 'react-native-navigation';
-import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-dayjs.extend(relativeTime);
+import { FlatList } from 'react-native-gesture-handler';
 
 import { useStores } from '../stores';
 import Constants from '../utils/constants';
 import useStyles from '../utils/useStyles';
-import { generateRedditUserString } from '../utils/helpMethods';
 import { useServices } from '../services';
+import Post from '../components/Post';
+import { generateSubredditString } from '../utils/helpMethods';
 
 
 const SubredditPostsScreen: NavigationFunctionComponent<SubredditPostsScreenProps> = observer(({
@@ -27,7 +22,7 @@ const SubredditPostsScreen: NavigationFunctionComponent<SubredditPostsScreenProp
 }) => {
   const { subreddits } = useStores();
   const { navigation } = useServices();
-  const styles = useStyles(_styles);
+  const { styles } = useStyles(_styles);
 
   const { posts } = subreddits.dict[subreddit] as SubredditData || [];
 
@@ -50,23 +45,7 @@ const SubredditPostsScreen: NavigationFunctionComponent<SubredditPostsScreenProp
         refreshing={subreddits.loading}
         onRefresh={loadPosts}
         refreshControl={<RefreshControl refreshing={subreddits.loading} />}
-        renderItem={({ item }) => {
-          return (
-            <>
-              <TouchableOpacity onPress={openPost(item)}>
-                <View style={styles.buttonContainer}>
-                <View style={styles.upsTextContainer}>
-                    <Text style={styles.upsText}>{ item.ups }</Text>
-                  </View>
-                  <View style={styles.titlesContainer}>
-                    <Text style={styles.subtitle}>Posted by { generateRedditUserString(item.author) } { dayjs(item.created_utc*1000).fromNow() }</Text>
-                    <Text style={styles.title}>{ item.title }</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            </>
-          )
-        }}
+        renderItem={({ item }) => <Post item={item} onPress={openPost(item)} /> }
       />
     </SafeAreaView>
   );
@@ -80,40 +59,12 @@ const _styles = (theme: ThemeType) => StyleSheet.create({
   list: {
     flex: 1,
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginVertical: 8,
-  },
-  titlesContainer: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 18,
-    marginVertical: 2,
-    color: theme.colors.text,
-  },
-  subtitle: {
-    flex: 1,
-    marginVertical: 2,
-    fontSize: 14,
-    color: theme.colors.grey
-  },
-  upsTextContainer: {
-    width: 30,
-    margin: 2,
-  },
-  upsText: {
-    fontSize: 14,
-    textAlign: 'center',
-    color: theme.colors.grey,
-    // fontWeight: 'bold'
-  }
 });
 
 SubredditPostsScreen.options = props => ({
   topBar: {
     title: {
-      text: `r/${props.subreddit}`,
+      text: generateSubredditString(props.subreddit),
     },
   },
 });
