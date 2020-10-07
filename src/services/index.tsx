@@ -1,10 +1,12 @@
 import React from 'react';
 
 import NavigationService from './navigation';
+import ApiService from './api';
 // import DarkmodeService from './darkmode';
 
 export const services = {
   navigation: NavigationService,
+  api: ApiService,
   // darkmode: DarkmodeService, // not really needed
 };
 
@@ -24,5 +26,6 @@ export const useServices = () => React.useContext(servicesContext);
 // you can use services for having one for metrics or handling navigation actions
 export const initServices = async () => {
   await services.navigation.init();
+  await services.api.init();
   // await services.darkmode.init();
 };
