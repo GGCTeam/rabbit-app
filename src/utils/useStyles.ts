@@ -49,7 +49,8 @@ function useStyles<T>(themedStylesFunc: ThemedStylesFuncType<T>) {
 
   useEffect(() => {
     const onModeChange = (_cs: any) => {
-      const cs = _cs.colorScheme as ThemeNameType;
+      // const cs = _cs.colorScheme as ThemeNameType; // somehow _cs.colorScheme gives wrong value when app goes to background mode
+      const cs = Appearance.getColorScheme() as ThemeNameType;
 
       setThemeName(cs);
     };
@@ -105,8 +106,9 @@ const normalize = (
   let h_value = 667; // x1.25 -- 833.75; x1.5 -- 1000.5; x2 -- 1334
 
   if (isTablet()) {
-      w_value *= 2.5;
-      h_value *= 2.5;
+    const tabletRatio = 2.25;
+    w_value *= tabletRatio;
+    h_value *= tabletRatio;
   }
 
   // based on iPhone 8's scale
