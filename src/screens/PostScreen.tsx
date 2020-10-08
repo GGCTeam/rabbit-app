@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import {
     SafeAreaView,
-    Text,
     View,
     StyleSheet, ActivityIndicator, Share, Linking
 } from 'react-native';
@@ -12,7 +11,7 @@ import { WebView } from 'react-native-webview';
 import { stores, useStores } from '../stores';
 import Constants from '../utils/constants';
 import useStyles from '../utils/useStyles';
-import { generateRedditPostUrl, generateRedditUserString, sleep } from '../utils/helpMethods';
+import { generateRedditPostUrl, generateRedditUserString } from '../utils/helpMethods';
 import { useNavigationButtonPress } from 'react-native-navigation-hooks/dist/hooks';
 import { ButtonToolbar } from '../components/Button';
 
@@ -25,19 +24,11 @@ const PostScreen: NavigationFunctionComponent<PostScreenProps> = observer(({
   const postUrl = generateRedditPostUrl(post.permalink);
 
   const store = useLocalObservable(() => ({
-    canShowcontent: false, // fix for android, to correctly show webview
     loading: true,
     finishLoading() {
       store.loading = false;
     },
-    showContent() {
-      store.canShowcontent = true;
-    },
   }));
-
-  useEffect(() => {
-    setTimeout(store.showContent, 500); // mostly problem on android
-  }, [componentId]);
 
   useNavigationButtonPress(() => { savePost() }, componentId, Constants.PostScreen.saveButton.id);
   useNavigationButtonPress(() => { removePost() }, componentId, Constants.PostScreen.removeButton.id);
@@ -70,29 +61,24 @@ const PostScreen: NavigationFunctionComponent<PostScreenProps> = observer(({
 
   return (
     <SafeAreaView style={styles.container}>
-      {
-        store.canShowcontent
-          ? (
-            <View style={styles.webViewContainer}>
-              <WebView
-                source={{ uri: postUrl }}
-                onLoadEnd={store.finishLoading}
-              />
-              <View style={styles.toolbar}>
-                <ButtonToolbar
-                  title={'Share'}
-                  onPress={shareUrl}
-                />
-                { store.loading ? generateIndicator() : undefined }
-                <ButtonToolbar
-                  title={'Open in browser'}
-                  onPress={openUrl}
-                />
-              </View>
-            </View>
-          )
-          : undefined
-      }
+      <View style={styles.webviewAndActionsContainer}>
+        <WebView
+          source={{ uri: postUrl }}
+          onLoadEnd={store.finishLoading}
+          androidHardwareAccelerationDisabled={true}
+        />
+        <View style={styles.toolbar}>
+          <ButtonToolbar
+            title={'Share'}
+            onPress={shareUrl}
+          />
+          { store.loading ? generateIndicator() : undefined }
+          <ButtonToolbar
+            title={'Open in browser'}
+            onPress={openUrl}
+          />
+        </View>
+      </View>
     </SafeAreaView>
   );
 });
@@ -104,7 +90,7 @@ const _styles = (theme: ThemeType) => StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: theme.colors.bg,
   },
-  webViewContainer: {
+  webviewAndActionsContainer: {
     width: '100%',
     height: '100%',
     backgroundColor: theme.colors.bg,
