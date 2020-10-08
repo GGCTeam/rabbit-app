@@ -1,10 +1,10 @@
 {
-  "name": "expo-rnn-starter",
-  "version": "6.0.0",
-  "description": "Expo SDK, React Native Navigation, Reanimated 2, Mobx, Dark Mode support, Expo Updates. Ready for production!",
+  "name": "rabbit-app",
+  "version": "1.0.0",
+  "description": "Rabbit app - lite handy Reddit client for iOS and Android.",
   "license": "MIT",
   "author": "Batyr Kanzitdinov <say_hi@batyr.io>",
-  "homepage": "https://github.com/kanzitelli/expo-rnn-starter",
+  "homepage": "https://github.com/kanzitelli/rabbit-app",
   "scripts": {
     "android": "npx react-native run-android",
     "android:release": "yarn android --variant release",
@@ -12,12 +12,14 @@
     "ios:pods": "npx pod-install",
     "start": "npx react-native start",
     "test": "jest",
-    "release": "dotenv npx release-it"
+    "release": "dotenv npx release-it",
+    "package:install": "yarn add $* && yarn ios:pods && yarn ios && yarn android"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.0",
     "dayjs": "^1.9.1",
     "expo": "^39.0.3",
+    "expo-mail-composer": "^8.4.0",
     "expo-network": "^2.3.0",
     "expo-updates": "^0.3.5",
     "hermes-engine": "0.5.2-rc1",
@@ -32,6 +34,7 @@
     "react-native-gesture-handler": "^1.8.0",
     "react-native-navigation": "^7.1.0",
     "react-native-navigation-hooks": "^6.2.0",
+    "react-native-rate": "^1.2.4",
     "react-native-reanimated": "^2.0.0-alpha.7",
     "react-native-unimodules": "^0.11.0",
     "react-native-vector-icons": "^7.1.0",
