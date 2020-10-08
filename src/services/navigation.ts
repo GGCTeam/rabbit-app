@@ -17,7 +17,7 @@ class NavigationService implements IService {
   }
 
   pushSubredditPosts<T>(cId: string, passProps?: T) {
-    this.push(cId, Constants.ScreenNames.SubredditPostsScreen, passProps);
+    this.push(cId, Constants.ScreenNames.PostsScreen, passProps);
   }
 
   pushPost = (cId: string, passProps: PostScreenProps) => {
