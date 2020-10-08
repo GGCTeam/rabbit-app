@@ -58,7 +58,7 @@ type SubredditData = {
   posts: RedditPost[];
 }
 
-type SubredditPostsScreenProps = {
+type PostsScreenProps = {
   subreddit: string;
 }
 
