@@ -4,7 +4,7 @@ class Contants {
     SubredditsScreen: `${prefix}.SubredditsScreen`,
     SavedScreen: `${prefix}.SavedScreen`,
     SettingsScreen: `${prefix}.SettingsScreen`,
-    SubredditPostsScreen: `${prefix}.SubredditPostsScreen`,
+    PostsScreen: `${prefix}.PostsScreen`,
     PostScreen: `${prefix}.PostScreen`,
 
     TextInputPrompt: `${prefix}.TextInputPrompt`,
@@ -20,6 +20,13 @@ class Contants {
     SubredditsScreen: 'Subreddits',
     SavedScreen: 'Saved',
     SettingsScreen: 'Settings',
+  }
+
+  SubredditsScreen = {
+    addButton: {
+      id: 'add_button',
+      text: 'Add',
+    },
   }
 
   PostScreen = {
@@ -42,6 +49,7 @@ class Contants {
     grey: '#636e72',
     blue: '#4d7198',
     yellow: '#fbc531',
+    red: '#dd2c00',
   }
   sizes = {
     s: 8,
