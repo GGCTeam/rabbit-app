@@ -65,7 +65,7 @@ const PostScreen: NavigationFunctionComponent<PostScreenProps> = observer(({
         <WebView
           source={{ uri: postUrl }}
           onLoadEnd={store.finishLoading}
-          androidHardwareAccelerationDisabled={true}
+          androidHardwareAccelerationDisabled={true} // https://github.com/react-native-webview/react-native-webview/issues/1069#issuecomment-642072920
         />
         <View style={styles.toolbar}>
           <ButtonToolbar
