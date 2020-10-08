@@ -26,6 +26,9 @@ PODS:
     - UMCore
     - UMPermissionsInterface
     - UMTaskManagerInterface
+  - EXMailComposer (8.4.0):
+    - UMCore
+    - UMFileSystemInterface
   - EXNetwork (2.3.0):
     - UMCore
   - EXPermissions (9.3.0):
@@ -343,6 +346,8 @@ PODS:
     - React-Core
   - RNGestureHandler (1.8.0):
     - React
+  - RNRate (1.2.4):
+    - React
   - RNReanimated (2.0.0-alpha.7):
     - DoubleConversion
     - FBLazyVector
@@ -405,6 +410,7 @@ DEPENDENCIES:
   - EXKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - EXLinearGradient (from `../node_modules/expo-linear-gradient/ios`)
   - EXLocation (from `../node_modules/expo-location/ios`)
+  - EXMailComposer (from `../node_modules/expo-mail-composer/ios`)
   - EXNetwork (from `../node_modules/expo-network/ios`)
   - EXPermissions (from `../node_modules/expo-permissions/ios`)
   - EXSQLite (from `../node_modules/expo-sqlite/ios`)
@@ -459,6 +465,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNRate (from `../node_modules/react-native-rate`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - UMAppLoader (from `../node_modules/unimodules-app-loader/ios`)
@@ -510,6 +517,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-linear-gradient/ios"
   EXLocation:
     :path: "../node_modules/expo-location/ios"
+  EXMailComposer:
+    :path: "../node_modules/expo-mail-composer/ios"
   EXNetwork:
     :path: "../node_modules/expo-network/ios"
   EXPermissions:
@@ -576,6 +585,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNRate:
+    :path: "../node_modules/react-native-rate"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNVectorIcons:
@@ -622,6 +633,7 @@ SPEC CHECKSUMS:
   EXKeepAwake: 76eed36786534f6a476748e600fa6faf07ac3d09
   EXLinearGradient: 2f0230aa5d79c956aba618df3988eb0a9d283399
   EXLocation: a3b92458ec5c4356c5d932fe0d2bbe552ef7f4cb
+  EXMailComposer: 7436a0388652ee26b11b74d3c23180cadc000a45
   EXNetwork: 05c1b87ba7077cb3eea7a3968640e5007e32eb6b
   EXPermissions: 30cbe5b72bd209b65c00884180ad058a60bb413d
   EXSQLite: d0d8677c13e60d5db2812387f059c697be27d3fb
@@ -663,6 +675,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 2a692bcb9b69b76a2f1a95f33db057129700af64
   RNDeviceInfo: eb63f95c93ff1aae15353d113c130aebc6127915
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
+  RNRate: 15b861025a7821730761fce7f44561ce7e0b2de0
   RNReanimated: c40c29429b22a1564e505b789132cfcef456c6bd
   RNVectorIcons: bc69e6a278b14842063605de32bec61f0b251a59
   UMAppLoader: 5db5dc03176c6238da9c8b3657a370137882a4ad
