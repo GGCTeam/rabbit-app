@@ -50,11 +50,11 @@ const _styles = (theme: ThemeType) => StyleSheet.create({
   root: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#00000010',
+    backgroundColor: theme.colors.bg,
   },
   inputContainer: {
     alignItems: 'center',
-    backgroundColor: 'whitesmoke',
+    backgroundColor: theme.colors.bg,
     width: '100%',
     padding: 16,
     flexDirection: 'row',
@@ -68,12 +68,13 @@ const _styles = (theme: ThemeType) => StyleSheet.create({
   input: {
     height: 120,
     width: '100%',
-    // textAlign: 'center',
     fontSize: 32,
+    color: theme.colors.text,
   },
   inputPretext: {
     fontSize: 32,
     marginRight: theme.sizes.s,
+    color: theme.colors.text
   },
   closeButtonContainer: {
     marginTop: theme.sizes.s

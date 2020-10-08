@@ -20,7 +20,7 @@ const SavedScreen: NavigationFunctionComponent = observer(({
 }) => {
   const { subreddits } = useStores();
   const { navigation } = useServices();
-  const { styles } = useStyles(_styles);
+  const { styles, theme } = useStyles(_styles);
 
   const openPost = (post: RedditPost) => () =>
     navigation.pushPost(componentId, { post })
@@ -37,7 +37,7 @@ const SavedScreen: NavigationFunctionComponent = observer(({
         renderItem={({ item }) => (
           <AppleStyleSwipeableRow
             title={'Delete'}
-            backgroundColor={'#dd2c00'}
+            backgroundColor={theme.colors.red}
             onPress={removePost(item)}
           >
             <Post withSub item={item} onPress={openPost(item)} />
