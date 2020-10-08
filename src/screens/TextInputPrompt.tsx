@@ -38,7 +38,7 @@ const TextInputPrompt: NavigationFunctionComponent = ({
 
       <View style={styles.closeButtonContainer}>
         <ButtonIcon
-          icon={'closecircleo'}
+          icon={'close-outline'}
           onPress={dismiss}
         />
       </View>
