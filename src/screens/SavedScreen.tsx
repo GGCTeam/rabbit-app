@@ -13,7 +13,7 @@ import useStyles from '../utils/useStyles';
 import { useServices } from '../services';
 import Post from '../components/Post';
 import AppleStyleSwipeableRow from '../components/AppleStyleSwipeableRow';
-
+import EmptyListComponent from '../components/EmptyListComponent';
 
 const SavedScreen: NavigationFunctionComponent = observer(({
   componentId,
@@ -27,6 +27,10 @@ const SavedScreen: NavigationFunctionComponent = observer(({
 
   const removePost = (post: RedditPost) => () =>
     subreddits.removeSaved(post);
+
+  if (subreddits.saved.length === 0) {
+    return <EmptyListComponent text={Constants.SavedScreen.EmptyListText} />
+  }
 
   return (
     <SafeAreaView style={styles.container}>

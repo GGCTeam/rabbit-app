@@ -2,6 +2,8 @@ import React from 'react';
 import {
     SafeAreaView,
     StyleSheet,
+    Text,
+    View,
 } from 'react-native';
 import { observer } from 'mobx-react';
 import { NavigationFunctionComponent } from 'react-native-navigation';
@@ -14,6 +16,7 @@ import Constants from '../utils/constants';
 import useStyles from '../utils/useStyles';
 import AppleStyleSwipeableRow from '../components/AppleStyleSwipeableRow';
 import Subreddit from '../components/Subreddit';
+import EmptyListComponent from '../components/EmptyListComponent';
 
 const SubredditsScreen: NavigationFunctionComponent = observer(({
   componentId,
@@ -29,6 +32,11 @@ const SubredditsScreen: NavigationFunctionComponent = observer(({
 
   const deleteSubreddit = (subreddit: string) => () =>
     subreddits.removeSubreddit(subreddit);
+
+
+  if (subreddits.all.length === 0) {
+    return <EmptyListComponent text={Constants.SubredditsScreen.EmptyListText} />
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -59,7 +67,7 @@ const _styles = (theme: ThemeType) => StyleSheet.create({
   },
   list: {
     flex: 1,
-  }
+  },
 });
 
 SubredditsScreen.options = props => ({
