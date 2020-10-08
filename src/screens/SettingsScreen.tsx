@@ -35,10 +35,10 @@ const SettingsScreen: NavigationFunctionComponent = observer(({
       : console.log('MailComposer is not available');
 
   const openGithub = () =>
-    Linking.openURL('https://github.com/kanzitelli');
+    Linking.openURL(Constants.GithubUrl);
 
   const openArticle = () =>
-    Linking.openURL('https://medium.com/kanzitelli');
+    Linking.openURL(Constants.ArticleUrl);
 
   const openWebsite = () =>
     Linking.openURL(Constants.BaseUrl);

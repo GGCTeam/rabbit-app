@@ -32,6 +32,8 @@ class Contants {
   AppEmail = 'say_hi@batyr.io';
   BaseUrl = 'https://rabbitapp.batyr.io';
   AppUrl = this.BaseUrl + '/app';
+  ArticleUrl = this.BaseUrl + '/article';
+  GithubUrl = this.BaseUrl + '/github'
   RateAppConfig: IConfig = {
     AppleAppID: this.AppleAppId,
     GooglePackageName: this.GooglePackageName,
