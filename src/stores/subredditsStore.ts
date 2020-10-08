@@ -63,7 +63,7 @@ class SubredditsStore {
   }
 
   getPostsForSubreddit = async (subreddit: string) => {
-    this.loading = true
+    runInAction(() => this.loading = true);
 
     let posts: RedditPost[] = [];
     try {
@@ -83,7 +83,7 @@ class SubredditsStore {
       };
     });
 
-    this.loading = false
+    runInAction(() => this.loading = false);
   }
 
   addSaved = async (s: RedditPost) => {
