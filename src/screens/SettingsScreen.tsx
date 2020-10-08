@@ -78,11 +78,11 @@ const SettingsScreen: NavigationFunctionComponent = observer(({
             icon={'logo-github'}
             onPress={openGithub}
           />
-          <ButtonAction
+          {/* <ButtonAction
             title={'Article'}
             icon={'newspaper-outline'}
             onPress={openArticle}
-          />
+          /> */}
           <ButtonAction
             title={'Website'}
             icon={'ios-earth-outline'}
