@@ -7,20 +7,19 @@ import Constants from './utils/constants';
 import SubredditsScreen from './screens/SubredditsScreen';
 import SavedScreen from './screens/SavedScreen';
 import SettingsScreen from './screens/SettingsScreen';
-import SubredditPostsScreen from './screens/SubredditPostsScreen';
+import PostsScreen from './screens/PostsScreen';
 import PostScreen from './screens/PostScreen';
 import TextInputPrompt from './screens/TextInputPrompt';
 
 import { withStoresProvider, hydrateStores } from './stores';
 import { withServicesProvider, initServices } from './services';
-import { setOptionsForUseStyles } from './utils/useStyles';
 
 const Screens = new Map<string, React.FC<any>>();
 
 Screens.set(Constants.ScreenNames.SubredditsScreen, SubredditsScreen);
 Screens.set(Constants.ScreenNames.SavedScreen, SavedScreen);
 Screens.set(Constants.ScreenNames.SettingsScreen, SettingsScreen);
-Screens.set(Constants.ScreenNames.SubredditPostsScreen, SubredditPostsScreen);
+Screens.set(Constants.ScreenNames.PostsScreen, PostsScreen);
 Screens.set(Constants.ScreenNames.PostScreen, PostScreen);
 
 Screens.set(Constants.ScreenNames.TextInputPrompt, TextInputPrompt);
