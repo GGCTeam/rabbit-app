@@ -273,6 +273,9 @@ PODS:
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
   - React-jsinspector (0.63.2)
+  - react-native-appmetrica (2.0.0):
+    - React
+    - YandexMobileMetrica (= 3.9.4)
   - react-native-webview (10.9.2):
     - React-Core
   - React-RCTActionSheet (0.63.2):
@@ -335,6 +338,8 @@ PODS:
     - React-Core (= 0.63.2)
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
+  - ReactNativeExceptionHandler (2.10.8):
+    - React
   - ReactNativeNavigation (7.1.0):
     - React-Core
     - React-RCTImage
@@ -396,6 +401,14 @@ PODS:
     - UMFontInterface
   - UMSensorsInterface (5.3.0)
   - UMTaskManagerInterface (5.3.0)
+  - YandexMobileMetrica (3.9.4):
+    - YandexMobileMetrica/Static (= 3.9.4)
+  - YandexMobileMetrica/Static (3.9.4):
+    - YandexMobileMetrica/Static/Core (= 3.9.4)
+    - YandexMobileMetrica/Static/Crashes (= 3.9.4)
+  - YandexMobileMetrica/Static/Core (3.9.4)
+  - YandexMobileMetrica/Static/Crashes (3.9.4):
+    - YandexMobileMetrica/Static/Core
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -450,6 +463,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-appmetrica (from `../node_modules/react-native-appmetrica`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -461,6 +475,7 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - ReactNativeExceptionHandler (from `../node_modules/react-native-exception-handler`)
   - ReactNativeNavigation (from `../node_modules/react-native-navigation`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
@@ -496,6 +511,7 @@ SPEC REPOS:
     - Flipper-RSocket
     - FlipperKit
     - OpenSSL-Universal
+    - YandexMobileMetrica
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -555,6 +571,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-appmetrica:
+    :path: "../node_modules/react-native-appmetrica"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
@@ -577,6 +595,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  ReactNativeExceptionHandler:
+    :path: "../node_modules/react-native-exception-handler"
   ReactNativeNavigation:
     :path: "../node_modules/react-native-navigation"
   RNCAsyncStorage:
@@ -660,6 +680,7 @@ SPEC CHECKSUMS:
   React-jsi: 54245e1d5f4b690dec614a73a3795964eeef13a8
   React-jsiexecutor: 8ca588cc921e70590820ce72b8789b02c67cce38
   React-jsinspector: b14e62ebe7a66e9231e9581279909f2fc3db6606
+  react-native-appmetrica: 799bd81c1d9ba026705b54d7b7081c57b9348387
   react-native-webview: 4e96d493f9f90ba4f03b28933f30b2964df07e39
   React-RCTActionSheet: 910163b6b09685a35c4ebbc52b66d1bfbbe39fc5
   React-RCTAnimation: 9a883bbe1e9d2e158d4fb53765ed64c8dc2200c6
@@ -671,6 +692,7 @@ SPEC CHECKSUMS:
   React-RCTText: 1b6773e776e4b33f90468c20fe3b16ca3e224bb8
   React-RCTVibration: 4d2e726957f4087449739b595f107c0d4b6c2d2d
   ReactCommon: a0a1edbebcac5e91338371b72ffc66aa822792ce
+  ReactNativeExceptionHandler: 8025d98049c25f186835a3af732dd7c9974d6dce
   ReactNativeNavigation: 65025dab27b404053678593b2450ed7a022e3173
   RNCAsyncStorage: 2a692bcb9b69b76a2f1a95f33db057129700af64
   RNDeviceInfo: eb63f95c93ff1aae15353d113c130aebc6127915
@@ -691,6 +713,7 @@ SPEC CHECKSUMS:
   UMReactNativeAdapter: 61ae88818058b7849bbf5b79bf97872cb3c8e0eb
   UMSensorsInterface: 49bea41dcfcc041f0bbab27cfe4a6006f1dde0c0
   UMTaskManagerInterface: 6cad5929dbc0a5b986ad4d77caac497d4de730a7
+  YandexMobileMetrica: 1030df2959c886a7be3bc3d274eb54c8e86afd6f
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

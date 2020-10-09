@@ -13,7 +13,7 @@
     "start": "npx react-native start",
     "test": "jest",
     "release": "dotenv npx release-it",
-    "package:install": "yarn add $* && yarn ios:pods && yarn ios && yarn android"
+    "p:i:l": "yarn add $* && yarn ios:pods && yarn ios && yarn android"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.0",
@@ -30,7 +30,9 @@
     "mobx-state-tree": "^3.17.2",
     "react": "^16.13.1",
     "react-native": "^0.63.2",
+    "react-native-appmetrica": "^2.0.0",
     "react-native-device-info": "^6.2.0",
+    "react-native-exception-handler": "^2.10.8",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-navigation": "^7.1.0",
     "react-native-navigation-hooks": "^6.2.0",
