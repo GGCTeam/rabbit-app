@@ -2,11 +2,15 @@ import React from 'react';
 
 import NavigationService from './navigation';
 import ApiService from './api';
+import YandexService from './yandex';
+import ExceptionHandlerService from './exceptionHandler';
 // import DarkmodeService from './darkmode';
 
 export const services = {
   navigation: NavigationService,
   api: ApiService,
+  yandex: YandexService,
+  exceptionHandler: ExceptionHandlerService,
   // darkmode: DarkmodeService, // not really needed
 };
 
@@ -27,5 +31,7 @@ export const useServices = () => React.useContext(servicesContext);
 export const initServices = async () => {
   await services.navigation.init();
   await services.api.init();
+  await services.yandex.init();
+  await services.exceptionHandler.init();
   // await services.darkmode.init();
 };
