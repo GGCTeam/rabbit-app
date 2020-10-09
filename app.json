@@ -1,9 +1,9 @@
 {
-  "name": "Expo RNN Starter",
-  "displayName": "Expo RNN Starter",
+  "name": "Rabbit app",
+  "displayName": "Rabbit app",
   "expo": {
-    "name": "Expo RNN Starter",
-    "slug": "expo-rnn-starter",
+    "name": "Rabbit app",
+    "slug": "rabbit-app",
     "sdkVersion": "39.0.0"
   }
 }

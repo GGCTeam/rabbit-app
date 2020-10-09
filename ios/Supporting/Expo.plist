@@ -1,7 +1,8 @@
 {
-	EXUpdatesURL = "https://exp.host/@my-expo-username/my-app-slug";
+	EXUpdatesURL = "https://exp.host/@kanzitelli/rabbit-app";
 	EXUpdatesSDKVersion = "39.0.0";
-	EXUpdatesEnabled = "NO";
-	EXUpdatesCheckOnLaunch = "ALWAYS";
-	EXUpdatesLaunchWaitMs = 0;
+	EXUpdatesEnabled = YES;
+	"EXUpdatesCheckOnLaunch" = ALWAYS;
+	"EXUpdatesLaunchWaitMs" = 0;
+	"EXUpdatesReleaseChannel" = "prod-1.0";
 }
