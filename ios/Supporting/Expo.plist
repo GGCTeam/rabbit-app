@@ -5,12 +5,14 @@
 	<key>EXUpdatesCheckOnLaunch</key>
 	<string>ALWAYS</string>
 	<key>EXUpdatesEnabled</key>
-	<false/>
+	<true/>
 	<key>EXUpdatesLaunchWaitMs</key>
 	<integer>0</integer>
+	<key>EXUpdatesReleaseChannel</key>
+	<string>prod-v1.0</string>
 	<key>EXUpdatesSDKVersion</key>
 	<string>39.0.0</string>
 	<key>EXUpdatesURL</key>
-	<string>https://exp.host/@username/slug</string>
+	<string>https://exp.host/@kanzitelli/rabbit-app</string>
 </dict>
 </plist>
