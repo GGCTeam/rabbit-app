@@ -27,13 +27,13 @@ class Contants {
   }
 
   // Global
-  AppleAppId = '----'; // put app id after create the app at appstoreconnect.apple.com
+  AppleAppId = '1535084154';
   GooglePackageName = 'io.batyr.rabbitapp';
   AppEmail = 'say_hi@batyr.io';
   BaseUrl = 'https://rabbitapp.batyr.io';
   AppUrl = this.BaseUrl + '/app';
   ArticleUrl = this.BaseUrl + '/article';
-  GithubUrl = this.BaseUrl + '/github'
+  GithubUrl = this.BaseUrl + '/github';
   RateAppConfig: IConfig = {
     AppleAppID: this.AppleAppId,
     GooglePackageName: this.GooglePackageName,
@@ -44,7 +44,11 @@ class Contants {
     recipients: [this.AppEmail],
     subject: '[RABBIT APP] Question/Request/Other',
     body: 'Please, describe your question/request/something else? 🙂\n\n',
-  }
+  };
+  YandexApiKey = {
+    ios: 'fca35b4a-ce67-4f03-ae86-92333ad78a68',
+    android: 'ac53b3da-cc85-4b40-a7ea-08a56b00ff51',
+  };
 
   // Screens' contants
   SubredditsScreen = {
