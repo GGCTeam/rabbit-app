@@ -7,6 +7,4 @@
 
 @interface AppDelegate : UMAppDelegateWrapper <RCTBridgeDelegate, EXUpdatesAppControllerDelegate>
 
-@property (nonatomic, strong) UIWindow *window;
-
 @end
