@@ -30,6 +30,7 @@ local.properties
 *.iml
 *.hprof
 rabbit-app-key
+release/
 
 # Own
 #
