@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ListRenderItemInfo,
     SafeAreaView,
     StyleSheet,
     Text,
@@ -27,12 +28,19 @@ const SubredditsScreen: NavigationFunctionComponent = observer(({
 
   useNavigationButtonPress(navigation.showTextInputPrompt, componentId, Constants.SubredditsScreen.addButton.id);
 
-  const onSubredditPressed = (subreddit: string) => () =>
+  const pushSubredditPosts = (subreddit: string) => () =>
     navigation.pushSubredditPosts<PostsScreenProps>(componentId, { subreddit });
 
-  const onSubredditDeletePressed = (subreddit: string) => () =>
+  const deleteSubreddit = (subreddit: string) => () =>
     subreddits.removeSubreddit(subreddit);
 
+  const renderItem = ({ item }: ListRenderItemInfo<string>) => (
+    <Subreddit
+      item={item}
+      onPress={pushSubredditPosts(item)}
+      onDelete={deleteSubreddit(item)}
+    />
+  );
 
   if (subreddits.all.length === 0) {
     return <EmptyListComponent text={Constants.SubredditsScreen.EmptyListText} />
@@ -44,15 +52,7 @@ const SubredditsScreen: NavigationFunctionComponent = observer(({
         data={subreddits.all.slice()}
         keyExtractor={it => it}
         style={styles.list}
-        renderItem={({ item }) => {
-          return (
-            <Subreddit
-              item={item}
-              onPress={onSubredditPressed(item)}
-              onDelete={onSubredditDeletePressed(item)}
-            />
-          )
-        }}
+        renderItem={renderItem}
       />
     </SafeAreaView>
   );
