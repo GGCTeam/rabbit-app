@@ -57,6 +57,12 @@ class NavigationService implements IService {
       bottomTabs: {
         titleDisplayMode: 'alwaysShow',
       },
+      bottomTab: {
+        iconColor: Constants.colors.main,
+        textColor: Constants.colors.main,
+        selectedIconColor: Constants.colors.main,
+        selectedTextColor: Constants.colors.main,
+      },
       topBar: {
         title: {
           color: Constants.colors.main,

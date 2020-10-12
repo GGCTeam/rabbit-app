@@ -1,28 +1,12 @@
 import { observable, action, makeObservable, runInAction } from 'mobx';
 import { persist } from 'mobx-persist';
+import { HydratedStore, RedditPost, SubredditData } from '../utils/classes';
 import { services } from '../services';
 
-class RedditPost {
-  @persist @observable id = '';
-  @persist @observable title = '';
-  @persist @observable url = '';
-  @persist @observable permalink = '';
-  @persist @observable author = '';
-  @persist @observable ups = 0;
-  @persist @observable num_comments = 0;
-  @persist @observable subreddit = '';
-  @persist @observable created_utc = 0;
-}
-
-// tslint:disable-next-line: max-classes-per-file
-class SubredditData {
-  @persist('list', RedditPost) @observable posts = [];
-}
-
-// tslint:disable-next-line: max-classes-per-file
-class SubredditsStore {
-  STORAGE_ID = 'SubredditsStore';
+class SubredditsStore extends HydratedStore {
   constructor() {
+    super('SubredditsStore'); // Storage ID
+
     makeObservable(this, {
       all: observable,
       saved: observable,

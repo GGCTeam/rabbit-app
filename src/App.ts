@@ -58,13 +58,6 @@ export const startApp = async () => {
     Ionicons.getImageSource('settings', 25),
   ]);
 
-  const commonBottomTabStyle = {
-    iconColor: Constants.colors.blue,
-    textColor: Constants.colors.blue,
-    selectedIconColor: Constants.colors.blue,
-    selectedTextColor: Constants.colors.blue,
-  }
-
   Navigation.setRoot({
     root: {
       bottomTabs: {
@@ -80,7 +73,6 @@ export const startApp = async () => {
                 text: Constants.BottomTabsTitles.tab1,
                 icon: tab1,
                 selectedIcon: tab1Selected,
-                ...commonBottomTabStyle,
               },
             },
           },
@@ -96,7 +88,6 @@ export const startApp = async () => {
                 text: Constants.BottomTabsTitles.tab2,
                 icon: tab2,
                 selectedIcon: tab2Selected,
-                ...commonBottomTabStyle,
               },
             },
           },
@@ -112,7 +103,6 @@ export const startApp = async () => {
                 text: Constants.BottomTabsTitles.tab3,
                 icon: tab3,
                 selectedIcon: tab3Selected,
-                ...commonBottomTabStyle,
               },
             },
           },
