@@ -30,7 +30,7 @@ const SubredditsScreen: NavigationFunctionComponent = observer(({
   const onSubredditPressed = (subreddit: string) => () =>
     navigation.pushSubredditPosts<PostsScreenProps>(componentId, { subreddit });
 
-  const deleteSubreddit = (subreddit: string) => () =>
+  const onSubredditDeletePressed = (subreddit: string) => () =>
     subreddits.removeSubreddit(subreddit);
 
 
@@ -46,13 +46,11 @@ const SubredditsScreen: NavigationFunctionComponent = observer(({
         style={styles.list}
         renderItem={({ item }) => {
           return (
-            <AppleStyleSwipeableRow
-              title={'Delete'}
-              backgroundColor={theme.colors.red}
-              onPress={deleteSubreddit(item)}
-            >
-              <Subreddit item={item} onPress={onSubredditPressed(item)} />
-            </AppleStyleSwipeableRow>
+            <Subreddit
+              item={item}
+              onPress={onSubredditPressed(item)}
+              onDelete={onSubredditDeletePressed(item)}
+            />
           )
         }}
       />
