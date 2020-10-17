@@ -15,7 +15,6 @@ import { useStores } from '../stores';
 import { useServices } from '../services';
 import Constants from '../utils/constants';
 import useStyles from '../utils/useStyles';
-import AppleStyleSwipeableRow from '../components/AppleStyleSwipeableRow';
 import Subreddit from '../components/Subreddit';
 import EmptyListComponent from '../components/EmptyListComponent';
 
@@ -24,12 +23,12 @@ const SubredditsScreen: NavigationFunctionComponent = observer(({
 }) => {
   const { subreddits } = useStores();
   const { navigation } = useServices();
-  const { styles, theme } = useStyles(_styles);
+  const { styles } = useStyles(_styles);
 
   useNavigationButtonPress(navigation.showTextInputPrompt, componentId, Constants.SubredditsScreen.addButton.id);
 
   const pushSubredditPosts = (subreddit: string) => () =>
-    navigation.pushSubredditPosts<PostsScreenProps>(componentId, { subreddit });
+    navigation.pushSubredditPosts(componentId, { subreddit });
 
   const deleteSubreddit = (subreddit: string) => () =>
     subreddits.removeSubreddit(subreddit);
