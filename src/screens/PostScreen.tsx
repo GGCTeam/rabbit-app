@@ -30,9 +30,6 @@ const PostScreen: NavigationFunctionComponent<PostScreenProps> = observer(({
     },
   }));
 
-  useNavigationButtonPress(() => { savePost() }, componentId, Constants.PostScreen.saveButton.id);
-  useNavigationButtonPress(() => { removePost() }, componentId, Constants.PostScreen.removeButton.id);
-
   const savePost = async () => {
     subreddits.addSaved(post);
 
@@ -44,6 +41,9 @@ const PostScreen: NavigationFunctionComponent<PostScreenProps> = observer(({
 
     Navigation.mergeOptions(componentId, { topBar: { rightButtons: [Constants.PostScreen.saveButton] } });
   }
+
+  useNavigationButtonPress(savePost, componentId, Constants.PostScreen.saveButton.id);
+  useNavigationButtonPress(removePost, componentId, Constants.PostScreen.removeButton.id);
 
   const shareUrl = () =>
     Share.share({ url: postUrl });
@@ -102,11 +102,6 @@ const _styles = (theme: ThemeType) => StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  linkText: {
-    color: theme.colors.main,
-    margin: 12,
-    fontSize: 18,
   }
 });
 
