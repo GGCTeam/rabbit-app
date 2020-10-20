@@ -6,23 +6,41 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
 import useStyles from '../utils/useStyles';
+import AppleStyleSwipeableRow from './AppleStyleSwipeableRow';
 import { generateCommentsString, generateRedditUserString, generateSubredditString, kFormatter } from '../utils/helpMethods';
 
 type PostProps = {
   item: RedditPost;
   withSub?: boolean;
+  withoutDelete?: boolean;
   onPress: () => void;
+  onDelete?: () => void;
 }
 
 const Post: React.FC<PostProps> = ({
   item,
   withSub = false,
+  withoutDelete = false,
   onPress,
+  onDelete,
 }) => {
-  const { styles } = useStyles(_styles);
+  const { styles, theme } = useStyles(_styles);
+
+  const Wrapper = ({ children }: any) =>
+    withoutDelete
+      ? <>{children}</>
+      : (
+        <AppleStyleSwipeableRow
+          title={'Delete'}
+          backgroundColor={theme.colors.red}
+          onPress={onDelete}
+        >
+          { children }
+        </AppleStyleSwipeableRow>
+      )
 
   return (
-    <>
+    <Wrapper>
       <TouchableOpacity onPress={onPress}>
         <View style={styles.buttonContainer}>
           <View style={styles.upsTextContainer}>
@@ -38,7 +56,7 @@ const Post: React.FC<PostProps> = ({
           </View>
         </View>
       </TouchableOpacity>
-    </>
+    </Wrapper>
   )
 }
 
