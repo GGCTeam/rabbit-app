@@ -13,7 +13,7 @@ export class HydratedStore implements IHydratedStore {
 }
 
 // tslint:disable-next-line: max-classes-per-file
-export class RedditPost {
+export class RedditPostClass {
   @persist @observable id = '';
   @persist @observable title = '';
   @persist @observable url = '';
@@ -26,6 +26,6 @@ export class RedditPost {
 }
 
 // tslint:disable-next-line: max-classes-per-file
-export class SubredditData {
-  @persist('list', RedditPost) @observable posts = [];
+export class SubredditDataClass {
+  @persist('list', RedditPostClass) @observable posts = [];
 }

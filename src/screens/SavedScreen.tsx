@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ListRenderItemInfo,
     SafeAreaView,
     StyleSheet,
 } from 'react-native';
@@ -20,13 +21,22 @@ const SavedScreen: NavigationFunctionComponent = observer(({
 }) => {
   const { subreddits } = useStores();
   const { navigation } = useServices();
-  const { styles, theme } = useStyles(_styles);
+  const { styles } = useStyles(_styles);
 
   const openPost = (post: RedditPost) => () =>
     navigation.pushPost(componentId, { post })
 
   const removePost = (post: RedditPost) => () =>
     subreddits.removeSaved(post);
+
+  const renderItem = ({ item }: ListRenderItemInfo<RedditPost>) => (
+    <Post
+      withSub
+      item={item}
+      onPress={openPost(item)}
+      onDelete={removePost(item)}
+    />
+  );
 
   if (subreddits.saved.length === 0) {
     return <EmptyListComponent text={Constants.SavedScreen.EmptyListText} />
@@ -38,15 +48,7 @@ const SavedScreen: NavigationFunctionComponent = observer(({
         data={subreddits.saved.slice()}
         keyExtractor={it => it.id}
         style={styles.list}
-        renderItem={({ item }) => (
-          <AppleStyleSwipeableRow
-            title={'Delete'}
-            backgroundColor={theme.colors.red}
-            onPress={removePost(item)}
-          >
-            <Post withSub item={item} onPress={openPost(item)} />
-          </AppleStyleSwipeableRow>
-        )}
+        renderItem={renderItem}
       />
     </SafeAreaView>
   );

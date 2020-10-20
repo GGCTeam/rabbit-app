@@ -1,6 +1,6 @@
 import { observable, action, makeObservable, runInAction } from 'mobx';
 import { persist } from 'mobx-persist';
-import { HydratedStore, RedditPost, SubredditData } from '../utils/classes';
+import { HydratedStore, RedditPostClass, SubredditDataClass } from '../utils/classes';
 import { services } from '../services';
 
 class SubredditsStore extends HydratedStore {
@@ -15,14 +15,15 @@ class SubredditsStore extends HydratedStore {
       addSubreddit: action,
       removeSubreddit: action,
       getPostsForSubreddit: action,
+      setLoading: action,
       addSaved: action,
       removeSaved: action,
     });
   }
 
   @persist('list') all: string[] = [];
-  @persist('list', RedditPost) saved: RedditPost[] = [];
-  @persist('map', SubredditData) dict = {};
+  @persist('list', RedditPostClass) saved: RedditPost[] = [];
+  @persist('map', SubredditDataClass) dict: Map<string, SubredditData> = new Map();
   loading = false;
 
   addSubreddit = async (subreddit: string) => {
@@ -42,12 +43,12 @@ class SubredditsStore extends HydratedStore {
 
     if (ndx !== -1) {
       this.all.splice(ndx, 1);
-      delete this.dict[subreddit];
+      this.dict.delete(subreddit);
     }
   }
 
   getPostsForSubreddit = async (subreddit: string) => {
-    runInAction(() => this.loading = true);
+    this.setLoading(true);
 
     let posts: RedditPost[] = [];
     try {
@@ -57,18 +58,12 @@ class SubredditsStore extends HydratedStore {
       console.log(e);
     }
 
-    runInAction(() => {
-      this.dict = {
-        ...this.dict,
-        [subreddit]: {
-          ...this.dict[subreddit],
-          posts,
-        }
-      };
-    });
+    runInAction(() => this.dict.set(subreddit, { posts }));
 
-    runInAction(() => this.loading = false);
+    this.setLoading(false);
   }
+
+  setLoading = (value: boolean) => this.loading = value;
 
   addSaved = async (s: RedditPost) => {
     this.saved.unshift(s);

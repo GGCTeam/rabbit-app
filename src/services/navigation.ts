@@ -16,7 +16,7 @@ class NavigationService implements IService {
     Navigation.dismissAllModals();
   }
 
-  pushSubredditPosts<PostsScreenProps>(cId: string, passProps?: PostsScreenProps) {
+  pushSubredditPosts<PostsScreenProps>(cId: string, passProps: PostsScreenProps) {
     this.push(cId, Constants.ScreenNames.PostsScreen, passProps);
   }
 

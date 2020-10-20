@@ -16,6 +16,7 @@ import { useStores } from '../stores';
 import Constants from '../utils/constants';
 import useStyles from '../utils/useStyles';
 import { ButtonAction, ButtonTitle } from '../components/Button';
+import { Section } from '../components/Section';
 
 const SettingsScreen: NavigationFunctionComponent = observer(({
   componentId,
@@ -46,11 +47,7 @@ const SettingsScreen: NavigationFunctionComponent = observer(({
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <View style={styles.section}>
-          <Text style={styles.header}>
-            { 'General' }
-          </Text>
-
+        <Section header={'General'}>
           <ButtonAction
             title={'Share'}
             icon={'ios-share-outline'}
@@ -66,13 +63,9 @@ const SettingsScreen: NavigationFunctionComponent = observer(({
             icon={'mail-unread-outline'}
             onPress={openSupport}
           />
-        </View>
+        </Section>
 
-        <View style={styles.section}>
-          <Text style={styles.header}>
-            { 'Links' }
-          </Text>
-
+        <Section header={'Links'}>
           <ButtonAction
             title={'Repository'}
             icon={'logo-github'}
@@ -88,19 +81,15 @@ const SettingsScreen: NavigationFunctionComponent = observer(({
             icon={'ios-earth-outline'}
             onPress={openWebsite}
           />
-        </View>
+        </Section>
 
-        <View style={styles.section}>
-          <Text style={styles.header}>
-            { 'About' }
-          </Text>
-
+        <Section header={'About'}>
           <ButtonAction
             disabled
             title={`Version: ${getReadableVersion()}`}
             icon={'information-circle-outline'}
           />
-        </View>
+        </Section>
       </ScrollView>
     </SafeAreaView>
   );
@@ -110,19 +99,6 @@ const _styles = (theme: ThemeType) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colors.bg,
-  },
-  section: {
-    padding: theme.sizes.m,
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: theme.colors.main,
-  },
-  text: {
-    fontSize: 20,
-    margin: theme.sizes.s,
-    color: theme.colors.text,
   },
 });
 

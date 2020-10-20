@@ -3,6 +3,7 @@ import {
     SafeAreaView,
     StyleSheet,
     RefreshControl,
+    ListRenderItemInfo
 } from 'react-native';
 import { observer } from 'mobx-react';
 import { NavigationFunctionComponent } from 'react-native-navigation';
@@ -14,7 +15,6 @@ import { useServices } from '../services';
 import Post from '../components/Post';
 import { generateSubredditString } from '../utils/helpMethods';
 
-
 const PostsScreen: NavigationFunctionComponent<PostsScreenProps> = observer(({
   componentId,
   subreddit,
@@ -23,7 +23,7 @@ const PostsScreen: NavigationFunctionComponent<PostsScreenProps> = observer(({
   const { navigation } = useServices();
   const { styles } = useStyles(_styles);
 
-  const { posts } = subreddits.dict[subreddit] as SubredditData || [];
+  const { posts } = subreddits.dict.get(subreddit) || { posts: [] };
 
   useEffect(() => {
     loadPosts();
@@ -32,8 +32,16 @@ const PostsScreen: NavigationFunctionComponent<PostsScreenProps> = observer(({
   const loadPosts = async () =>
     await subreddits.getPostsForSubreddit(subreddit);
 
-  const openPost = (post: RedditPost) => async () =>
+  const openPost = (post: RedditPost) => () =>
     navigation.pushPost(componentId, { post })
+
+  const renderItem = ({ item }: ListRenderItemInfo<RedditPost>) => (
+    <Post
+      item={item}
+      onPress={openPost(item)}
+      withoutDelete
+    />
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -44,7 +52,7 @@ const PostsScreen: NavigationFunctionComponent<PostsScreenProps> = observer(({
         refreshing={subreddits.loading}
         onRefresh={loadPosts}
         refreshControl={<RefreshControl refreshing={subreddits.loading} />}
-        renderItem={({ item }) => <Post item={item} onPress={openPost(item)} /> }
+        renderItem={renderItem}
       />
     </SafeAreaView>
   );
