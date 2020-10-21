@@ -5,7 +5,7 @@
 - [Medium article](https://rabbitapp.batyr.io/article)
 - [App Store](https://apps.apple.com/us/app/id1535084154)
 - [Google Play](https://play.google.com/store/apps/details?id=io.batyr.rabbitapp)
-- [Website](https://rabbitapp.batyr,io/)
+- [Website](https://rabbitapp.batyr.io/)
 
 ---
 #### from [`expo-rnn-starter`](https://github.com/kanzitelli/expo-rnn-starter)
