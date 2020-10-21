@@ -1,10 +1,11 @@
 [<img src="https://i.postimg.cc/cLKN8VR8/medium-rabbit-app-header.png" width="100%" title="Logo">](https://rabbitapp.batyr.io/app)
 [<img src="https://i.postimg.cc/YSbVnRzw/Screenshot-2020-10-21-at-12-43-08.png" width="100%" title="Screenshots">](https://rabbitapp.batyr.io/app)
 
-[Medium article](https://rabbitapp.batyr.io/article)
-[App Store](https://apps.apple.com/us/app/id1535084154)
-[Google Play](https://play.google.com/store/apps/details?id=io.batyr.rabbitapp)
-[Website](https://rabbitapp.batyr.io/)
+### Links
+- [Medium article](https://rabbitapp.batyr.io/article)
+- [App Store](https://apps.apple.com/us/app/id1535084154)
+- [Google Play](https://play.google.com/store/apps/details?id=io.batyr.rabbitapp)
+- [Website](https://rabbitapp.batyr,io/)
 
 ---
 #### from [`expo-rnn-starter`](https://github.com/kanzitelli/expo-rnn-starter)
